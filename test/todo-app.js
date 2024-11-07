@@ -6,20 +6,20 @@ fixture("Todo app tests")
 
     test("Add a todo", async t => {
         await t
-            .typeText(Selector("#todoInput"), "Buy milk")
+            .typeText(Selector("#todo-input"), "Buy milk")
             .click(Selector("#addTodo"))
-            .typeText(Selector("#todoInput"), "Mow lawn")
+            .typeText(Selector("#todo-input"), "Mow lawn")
             .click(Selector("#addTodo"))
-            .expect(Selector("#todoList").childElementCount).eql(2)
+            .expect(Selector("#todo-list").childElementCount).eql(2)
     });
     
     test("Delete a todo", async t => {
         await t
-            .typeText(Selector("#todoInput"), "Buy milk")
+            .typeText(Selector("#todo-input"), "Buy milk")
             .click(Selector("#addTodo"))
-            .typeText(Selector("#todoInput"), "Mow lawn")
+            .typeText(Selector("#todo-input"), "Mow lawn")
             .click(Selector("#addTodo"))
-            .click(Selector("#todoList").child(0).find(".delete"))
-            .expect(Selector("#todoList").childElementCount).eql(1)
+            .click(Selector("#todo-list").child(0).find(".delete"))
+            .expect(Selector("#todo-list").childElementCount).eql(1)
     });
     
