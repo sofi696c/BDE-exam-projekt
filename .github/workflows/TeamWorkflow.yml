@@ -19,15 +19,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build website
-        run: npm run build
-
       - name: FTP delivery
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ${{vars.FTP_SERVER}}
-          username: ${{secrets.FTP_USERNAME}}
-          password: ${{secrets.FTP_PASSWORD}}
-          server-dir: test/todo/ # test.sofiefischer.dk/todo/
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: test/todo/
           local-dir: dist/
+        env:
+          DEBUG: true
 
