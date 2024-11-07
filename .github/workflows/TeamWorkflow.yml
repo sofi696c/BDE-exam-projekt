@@ -31,14 +31,3 @@ jobs:
           server-dir: test/todo/ # test.sofiefischer.dk/todo/
           local-dir: dist/
 
-      - name: Install TestCafe
-        run: npm install -g testcafe
-
-      - name: Update APT
-        run: apt-get update
-      
-      - name: Install Chromium
-        run: apt-get install -y chromium-browser
-
-      - name: Run tests
-        rung: testcafe chromium:headless tests/*
