@@ -35,15 +35,15 @@ fixture("Todo app tests")
     test("Change theme", async t => {
         await t
             // Arrange
-            .expect(Selector('body').getAttribute('data-theme')).eql('light') // Forventet standardtema (f.eks. 'light')
+            .expect(Selector('body').getAttribute('data-theme')).eql('light') 
     
             // Act
-            .click(Selector('#themeSelector').withText('Dark')) // Vælg 'Dark' tema
-            .expect(Selector('body').getAttribute('data-theme')).eql('dark') // Forvent 'dark' tema
+            .click(Selector('#themeSelector').withText('Dark')) 
+            .expect(Selector('body')).eql('dark') 
     
             // Act
-            .click(Selector('#themeSelector').withText('Light')) // Vælg 'Light' tema
-            .expect(Selector('body').getAttribute('data-theme')).eql('light'); // Forvent 'light' tema
+            .click(Selector('#themeSelector').withText('Light')) 
+            .expect(Selector('body')).eql('light'); 
     });
 
 
