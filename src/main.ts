@@ -207,3 +207,32 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeColorPicker();
   renderTodos(); // Initial visning af alle opgaver
 });
+
+// theme selector
+const initializeThemeSelector = (): void => {
+  const themeSelector = document.getElementById('themeSelector') as HTMLSelectElement;
+
+  if (themeSelector) {
+    // Indlæs det gemte tema eller sæt standardtema til "light"
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.setAttribute('data-theme', savedTheme);
+    themeSelector.value = savedTheme;
+
+    // Event listener for at skifte tema
+    themeSelector.addEventListener('change', (event: Event) => {
+      const target = event.target as HTMLSelectElement;
+      changeTheme(target.value);
+    });
+  } else {
+    console.error('Theme selector not found');
+  }
+};
+
+const changeTheme = (theme: string): void => {
+  document.body.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme); // Gemmer brugerens tema-præference
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeThemeSelector();
+});
