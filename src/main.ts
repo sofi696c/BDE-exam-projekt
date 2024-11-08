@@ -1,4 +1,4 @@
-import './style.css'
+import './style.css';
 
 interface Todo {
   id: number;
@@ -14,6 +14,7 @@ const todoInput = document.getElementById('todo-input') as HTMLInputElement;
 const todoList = document.getElementById('todo-list') as HTMLUListElement;
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement;
 const dueDateInput = document.getElementById('due-date') as HTMLInputElement; // Nyt due date inputfelt
+const priorityFilter = document.getElementById('priority-filter') as HTMLSelectElement; // Prioritet filterelement
 
 // Funktion til at tilføje en ny to-do
 const addTodo = (text: string, dueDate: string, priority: 'Low' | 'Medium' | 'High'): void => {
@@ -26,7 +27,7 @@ const addTodo = (text: string, dueDate: string, priority: 'Low' | 'Medium' | 'Hi
   };
   todos.push(newTodo);
   console.log("todo added", todos);
-  renderTodos();
+  renderTodos(); // Opdater visningen med den nye opgave
 };
 
 // Funktion til at render todos
@@ -52,7 +53,7 @@ const renderTodos = (): void => {
           li.style.backgroundColor = 'darkgrey'; // Grå baggrund for medium prioritet
           break;
         case 'Low':
-          li.style.backgroundColor = 'lightgrey'; // Lys grøn baggrund for lav prioritet
+          li.style.backgroundColor = 'lightgrey'; // Lys grå baggrund for lav prioritet
           break;
       }
     }
@@ -73,11 +74,67 @@ const renderTodos = (): void => {
   });
 };
 
+// Funktion til at vise filtrerede opgaver baseret på prioritet
+const renderFilteredTodos = (filteredTodos: Todo[]): void => {
+  todoList.innerHTML = ''; // Ryd tidligere liste
+  filteredTodos.forEach(todo => {
+    const li = document.createElement('li');
+    li.className = 'todo-item';
+
+    // Fremhæv to-dos der er forfaldne
+    const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date();
+    if (isOverdue) {
+      li.style.backgroundColor = 'lightcoral';
+    } else if (todo.completed) {
+      li.style.backgroundColor = 'lightgreen';
+    } else {
+      switch (todo.priority) {
+        case 'High':
+          li.style.backgroundColor = 'grey';
+          break;
+        case 'Medium':
+          li.style.backgroundColor = 'darkgrey';
+          break;
+        case 'Low':
+          li.style.backgroundColor = 'lightgrey';
+          break;
+      }
+    }
+
+    li.innerHTML = `
+      <span>${todo.title}</span>
+      ${todo.dueDate ? `<span class="due-date">Due: ${todo.dueDate}</span>` : ''}
+      <span class="priority">Priority: ${todo.priority}</span>
+      <button class="toggle-status">Mark as ${todo.completed ? 'Incomplete' : 'Complete'}</button>
+      <button id="delete" class="remove-button">Remove</button>
+      <button id="editBtn">Edit</button>
+    `;
+
+    addToggleStatusButtonListener(li, todo.id);
+    addRemoveButtonListener(li, todo.id);
+    addEditButtonListener(li, todo.id);
+    todoList.appendChild(li);
+  });
+};
+
+// Funktion til at filtrere opgaver efter valgt prioritet
+const filterByPriority = (): void => {
+  const selectedPriority = priorityFilter.value as 'Low' | 'Medium' | 'High' | '';
+
+  const filteredTodos = selectedPriority
+    ? todos.filter(todo => todo.priority === selectedPriority)
+    : todos;
+
+  renderFilteredTodos(filteredTodos); // Brug den filtrerede render-funktion
+};
+
+// Event listener til at filtrere opgaver baseret på prioritet
+priorityFilter.addEventListener('change', filterByPriority);
 
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const text = todoInput.value.trim();
-  const dueDate = dueDateInput.value; // Få fat i værdien af due date
+  const dueDate = dueDateInput.value;
   const priority = (document.getElementById('priority') as HTMLSelectElement).value as 'Low' | 'Medium' | 'High';
   
   if (text !== '') {
@@ -148,6 +205,7 @@ const changeBackgroundColor = (color: string): void => {
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeColorPicker();
+  renderTodos(); // Initial visning af alle opgaver
 });
 
 // theme selector
