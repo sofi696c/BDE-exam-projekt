@@ -28,6 +28,14 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+}
+.container{
+  background-color: rgb(243, 243, 243);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+
 }
 
 h1 {
@@ -91,7 +99,7 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
   }
 }
 
@@ -110,3 +118,4 @@ button:focus-visible {
   font-size: 0.8em;
   color: rgb(47, 45, 45);
 }
+

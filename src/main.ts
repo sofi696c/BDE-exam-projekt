@@ -149,3 +149,5 @@ const changeBackgroundColor = (color: string): void => {
 document.addEventListener('DOMContentLoaded', () => {
   initializeColorPicker();
 });
+
+
