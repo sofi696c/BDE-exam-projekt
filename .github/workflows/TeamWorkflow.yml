@@ -28,7 +28,7 @@ jobs:
           server: ${{ vars.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: todo/
+          server-dir: test/todo/
           local-dir: dist/
 
       - name: Install TestCafe

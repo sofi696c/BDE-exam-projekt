@@ -62,7 +62,7 @@ const renderTodos = (): void => {
       ${todo.dueDate ? `<span class="due-date">Due: ${todo.dueDate}</span>` : ''}
       <span class="priority">Priority: ${todo.priority}</span>
       <button class="toggle-status">Mark as ${todo.completed ? 'Incomplete' : 'Complete'}</button>
-      <button class="remove-button">Remove</button>
+      <button id="delete" class="remove-button">Remove</button>
       <button id="editBtn">Edit</button>
     `;
 

@@ -1,7 +1,8 @@
 import {Selector} from 'testcafe';
 
 fixture("Todo app tests")
-    .page("https://sofiefischer.dk/test/todo/");
+    //.page("https://sofiefischer.dk/test/todo/");
+    .page("http://localhost:5174/todo/");
 
 
     test("Add a todo", async t => {
@@ -19,7 +20,7 @@ fixture("Todo app tests")
             .click(Selector("#addTodo"))
             .typeText(Selector("#todo-input"), "Mow lawn")
             .click(Selector("#addTodo"))
-            .click(Selector("#todo-list").child(0).find(".delete"))
+            .click(Selector("#todo-list").child(0).find("#delete"))
             .expect(Selector("#todo-list").childElementCount).eql(1)
     });
     
