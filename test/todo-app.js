@@ -1,8 +1,8 @@
 import {Selector} from 'testcafe';
 
 fixture("Todo app tests")
-    //.page("https://sofiefischer.dk/test/todo/");
-    .page("http://localhost:5174/todo/");
+    .page("https://sofiefischer.dk/test/todo/");
+    //.page("http://localhost:5174/todo/");
 
 
     test("Add a todo", async t => {
