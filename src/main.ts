@@ -37,12 +37,12 @@ const renderTodos = (): void => {
     const li = document.createElement('li');
     li.className = 'todo-item';
 
-    // Fremhæv to-dos der er forfaldne
+    // Fremhæv to-dos der er overskredet
     const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date();
     if (isOverdue) {
-      li.style.backgroundColor = 'lightcoral'; // Rød baggrund for forfaldne to-dos
+      li.style.backgroundColor = 'lightcoral'; 
     } else if (todo.completed) {
-      li.style.backgroundColor = 'lightgreen'; // Grøn baggrund for fuldførte to-dos
+      li.style.backgroundColor = 'lightgreen'; 
     } else {
       // Farv todoen baseret på prioritetsniveauet
       switch (todo.priority) {
