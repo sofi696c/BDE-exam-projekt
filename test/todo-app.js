@@ -31,44 +31,65 @@ fixture("Todo app tests")
             .expect(Selector("#todo-list").childElementCount).eql(1)
     });
     
+    // Test for at ændre tema
     test("Change theme", async t => {
-        // Arrange: Forvent at temaet er 'light' i starten
         await t
+            // Arrange
             .expect(Selector('body').getAttribute('data-theme')).eql('light') 
     
-        // Act: Klik på 'Dark' i tema-dropdown
-        .click(Selector('#themeSelector').withText('Dark')) 
+            // Act
+            .click(Selector('#themeSelector').withText('Dark')) 
+            .expect(Selector('body')).eql('dark') 
     
-        // Assert: Temaet skal være ændret til 'dark'
-        .expect(Selector('body').getAttribute('data-theme')).eql('dark') 
-    
-        // Act: Klik på 'Light' i tema-dropdown
-        .click(Selector('#themeSelector').withText('Light')) 
-    
-        // Assert: Temaet skal være ændret tilbage til 'light'
-        .expect(Selector('body').getAttribute('data-theme')).eql('light'); 
+            // Act
+            .click(Selector('#themeSelector').withText('Light')) 
+            .expect(Selector('body')).eql('light'); 
     });
 
 
+    // Test for at filtrere opgaver efter prioritet
     test("Filter tasks by priority", async t => {
-        // 1. Sørg for, at priority selector er synlig, før du interagerer med den
-        await t.expect(Selector('#prioritySelector').visible).ok('Priority selector is not visible');
-    
-        // 2. Opret en opgave med høj prioritet
         await t
+            // Arrange: Opret nogle opgaver med forskellige prioriteter
             .typeText(Selector("#todo-input"), "High priority task")
-            .click(Selector("#prioritySelector").withText('High'))  // Klik på "High"
-            .click(Selector("#addTodo"));
-    
-        // 3. Opret en opgave med medium prioritet
-        await t
+            .click(Selector("#prioritySelector").withText('High')) 
+            .click(Selector("#addTodo"))
+            
             .typeText(Selector("#todo-input"), "Medium priority task")
-            .click(Selector("#prioritySelector").withText('Medium'))  // Klik på "Medium"
-            .click(Selector("#addTodo"));
+            .click(Selector("#prioritySelector").withText('Medium')) 
+            .click(Selector("#addTodo"))
+            
+            .typeText(Selector("#todo-input"), "Low priority task")
+            .click(Selector("#prioritySelector").withText('Low')) 
+            .click(Selector("#addTodo"))
     
-        // 4. Bekræft, at opgaverne er blevet tilføjet korrekt
+            // Act: Filter opgaver efter høj prioritet
+            .click(Selector("#filterPriority").withText('High')) 
+    
+            // Assert: Forvent at kun opgaver med høj prioritet vises
+            .expect(Selector("#todo-list").childElementCount).eql(1) 
+            .expect(Selector("#todo-list").child(0).textContent).contains('High priority task') 
+            .expect(Selector("#todo-list").child(0).textContent).notContains('Medium priority task') 
+            .expect(Selector("#todo-list").child(0).textContent).notContains('Low priority task'); 
+    
+        // Act: Filter opgaver efter medium prioritet
         await t
-            .expect(Selector('.todo-list').innerText).contains('High priority task')
-            .expect(Selector('.todo-list').innerText).contains('Medium priority task');
+            .click(Selector("#filterPriority").withText('Medium')) 
+    
+            // Assert: Forvent at kun opgaver med medium prioritet vises
+            .expect(Selector("#todo-list").childElementCount).eql(1) // Der bør kun være én opgave med medium prioritet
+            .expect(Selector("#todo-list").child(0).textContent).contains('Medium priority task') 
+            .expect(Selector("#todo-list").child(0).textContent).notContains('High priority task') 
+            .expect(Selector("#todo-list").child(0).textContent).notContains('Low priority task'); 
+    
+        // Act: Filter opgaver efter lav prioritet
+        await t
+            .click(Selector("#filterPriority").withText('Low')) 
+    
+            // Assert: Forvent at kun opgaver med lav prioritet vises
+            .expect(Selector("#todo-list").childElementCount).eql(1) 
+            .expect(Selector("#todo-list").child(0).textContent).contains('Low priority task') 
+            .expect(Selector("#todo-list").child(0).textContent).notContains('High priority task') 
+            .expect(Selector("#todo-list").child(0).textContent).notContains('Medium priority task'); 
     });
     
