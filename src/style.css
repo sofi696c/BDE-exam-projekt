@@ -40,6 +40,7 @@ body {
   border-radius: 8px;
   background-color: #f0eeee;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
 
 .container{
   background-color: rgb(243, 243, 243);
@@ -152,16 +153,12 @@ button:focus-visible {
   border-color: #aaa;
 }
 
-/* Standard (lys tema) */
 body[data-theme="light"] {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: white;
+  color: black;
 }
 
-/* Mørk tema */
 body[data-theme="dark"] {
-  background-color: #121212;
-  color: #060606;
+  background-color: black;
+  color: rgb(58, 5, 132);
 }
-
-
