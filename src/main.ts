@@ -205,8 +205,8 @@ const changeBackgroundColor = (color: string): void => {
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeColorPicker();
-  initializeThemeSelector(); // Flyt her
-  renderTodos();
+  initializeThemeSelector();
+  renderTodos(); // Initial visning af alle opgaver
 });
 
 // theme selector
