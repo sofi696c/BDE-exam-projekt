@@ -28,6 +28,17 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #f0eeee;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -110,3 +121,39 @@ button:focus-visible {
   font-size: 0.8em;
   color: rgb(47, 45, 45);
 }
+
+/* Theme selector */
+#themeSelector {
+  width: 150px;
+  padding: 8px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+#themeSelector:hover {
+  background-color: #eaeaea;
+  border-color: #aaa;
+}
+
+/* Standard (lys tema) */
+body[data-theme="light"] {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Mørk tema */
+body[data-theme="dark"] {
+  background-color: #121212;
+  color: #060606;
+}
+
+
+
+
