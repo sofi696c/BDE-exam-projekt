@@ -28,6 +28,14 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+}
+.container{
+  background-color: rgb(243, 243, 243);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+
 }
 
 h1 {
@@ -91,7 +99,7 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
   }
 }
 
@@ -109,4 +117,49 @@ button:focus-visible {
 .due-date {
   font-size: 0.8em;
   color: rgb(47, 45, 45);
+}
+
+/* Style for themeSelector */
+#themeSelector {
+  width: 150px;                 
+  padding: 8px;                
+  font-size: 14px;              
+  font-family: Arial, sans-serif;
+  border-radius: 5px;           
+  background-color: #f9f9f9;    
+  color: #333;                 
+  appearance: none;             
+  cursor: pointer;              
+  transition: background-color 0.3s, border-color 0.3s; 
+}
+
+/* Style for hover effect */
+#themeSelector:hover {
+  background-color: #eaeaea;     
+  border-color: #aaa;           
+}
+
+/* Style for focus effect */
+#themeSelector:focus {
+  outline: none;                
+  border-color: #007bff;        
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+/* Style for dark theme */
+body[data-theme="dark"] #themeSelector {
+  background-color: #333;        
+  color: #f9f9f9;                
+  border-color: #555;            
+}
+
+body[data-theme="light"] {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Mørk tema */
+body[data-theme="dark"] {
+  background-color: #121212;
+  color: #ffffff;
 }
